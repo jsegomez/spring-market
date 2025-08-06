@@ -1,11 +1,11 @@
-package com.jsegomez.market.persistence;
+package com.jsegomez.market.persistence.entity;
 
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
 @Entity(name = "productos")
-@Table()
+@Table(name = "productos")
 public class Producto {
     @Id
     @Column(name = "id_producto")
