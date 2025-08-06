@@ -1,8 +1,10 @@
 package com.jsegomez.market.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "compras")
 @Table(name = "compras")
@@ -22,6 +24,14 @@ public class Compra {
 
     private String comentario;
     private Boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ComprasProducto> comprasProductos;
 
     public Integer getIdCompra() {
         return idCompra;
@@ -69,5 +79,21 @@ public class Compra {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ComprasProducto> getComprasProductos() {
+        return comprasProductos;
+    }
+
+    public void setComprasProductos(List<ComprasProducto> comprasProductos) {
+        this.comprasProductos = comprasProductos;
     }
 }
